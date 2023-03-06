@@ -45,8 +45,8 @@
             <div class="tool functions">Functions
                 <span class="btn btn-outline-secondary" id="text">Text</span>
                 <span class="btn btn-outline-secondary" id="erase">Erase</span>
-                <span class="btn btn-outline-secondary" id="undo">Undo</span>
-                <span class="btn btn-outline-secondary" id="redo">Redo</span>
+                <button onClick="undo_last()" type="button" class="btn btn-outline-secondary" id="undo">Undo</button>
+                <button onClick="redo_previous()" type="button" class="btn btn-outline-secondary" id="redo">Redo</button>
             </div>
 
             <div class="tool colors">Colors
@@ -60,8 +60,8 @@
             </div>
 
             <div class="tool whole">
-                <span class="btn btn-outline-secondary" id="clear">Clear All</span>
-                <span class="btn btn-outline-secondary" id="save">Save Image</span>
+                <button onClick="clear_canvas()" type="button" class="btn btn-outline-secondary" id="clear">Clear All</button>
+                <button type="button" class="btn btn-outline-secondary" id="clear">Save Image</button>
             </div>
 
         </div>
@@ -79,8 +79,6 @@
 <!-- custom js -->
 <!-- common canvas -->
 <script src="./canvas-common.js"></script>
-
-<script src="./color_change.js"></script>
 
 <!-- rectangle -->
 <script src="./rectangle.js"></script>

@@ -16,6 +16,10 @@ let isDrawing = false; //can specify later cuz, when we enter the canvas, it sta
 let draw_color = "black";
 let brushWidth = 2;
 
+//undo 
+let restore_array = [];
+let index = -1;
+
 //change_color
 function change_color(element) {
     draw_color = element.style.background;
@@ -33,7 +37,7 @@ const startDraw = (e) => {
     prevMouseX = e.offsetX; //mouseX position as prevMouse value
     prevMouseY = e.offsetY;
     ctxDraft.beginPath(); //create a new path to draw instead of connect from the last point
-    ctxDraft.lineWidth = brushWidth; //which is = 3
+    ctxDraft.lineWidth = brushWidth; //which is = 2
 }
 
 const drawing = (e) => {
@@ -41,11 +45,39 @@ const drawing = (e) => {
     ctxDraft.lineTo(e.offsetX, e.offsetY);
     ctxDraft.stroke();
     ctxDraft.strokeStyle = draw_color;
+
+    e.preventDefault();
+
+    //undo 
+    if(e.type != "mouseout") {
+        restore_array.push(ctxDraft.getImageData(0, 0, canvasDraft.width, canvasDraft.height));
+        index += 1;  
+    }
+}
+
+function clear_canvas() {
+    ctxDraft.fillStyle = "#ecedef";
+    ctxDraft.clearRect(0, 0, canvasDraft.width, canvasDraft.height);
+    ctxDraft.fillRect(0, 0, canvasDraft.width, canvasDraft.height);
+
+    restore_array = [];
+    index = -1;
+}
+
+function undo_last() {
+    if (index <= 0) {
+        clear_canvas();
+    } else {
+        index -= 1;
+        restore_array.pop();
+        ctxDraft.putImageData(restore_array[index], 0, 0);
+    }
 }
 
 canvasDraft.addEventListener("mousedown", startDraw); //when clicked, start draw
 canvasDraft.addEventListener("mouseup", () => isDrawing = false); //when release click, stop draw
 canvasDraft.addEventListener("mousemove", drawing);
+canvasDraft.addEventListener("mouseout", () => isDrawing = false)
 
 
 
