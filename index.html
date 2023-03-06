@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- font awesome -->
+    <script src="https://kit.fontawesome.com/b3ed543b82.js" crossorigin="anonymous"></script>
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <!-- custom style -->
+    <link rel="stylesheet" href="./style.css">
+    <title>Canvas Proejct</title>
+</head>
+<body>
+    <h1 style="text-decoration: underline;">Catherine and Tejahang Canvas Project 01</h1>    
+
+    <div class="field">
+        <div class="canvas container">
+            <canvas id="canvas-real" class="canvas" width="1000" height="500">
+            </canvas>
+            <canvas id="canvas-draft" class="canvas" width="1000" height="500"></canvas>  
+        </div>
+
+
+        <div class="tools">
+            <div class="tool shapes">Shapes
+                <span class="btn btn-outline-secondary" id="rectangle">Rectangle</span>
+                <span class="btn btn-outline-secondary" id="circle">Circle</span>
+                <span class="btn btn-outline-secondary" id="triangle">Triangle</span>
+                <span class="btn btn-outline-secondary" id="line">Line</span>
+                <span class="btn btn-outline-secondary" id="curve">Curve</span>
+            </div>
+
+            <div class="tool drawings">Drawings
+                <span class="btn btn-outline-secondary" id="pen">Pen</span>
+                <span class="btn btn-outline-secondary" id="spray">Spray</span>
+                <span class="btn btn-outline-secondary" id="stamp">Stamp</span>
+                <span class="btn btn-outline-secondary" id="fill">Fill</span>
+            </div>
+
+            <div class="tool functions">Functions
+                <span class="btn btn-outline-secondary" id="text">Text</span>
+                <span class="btn btn-outline-secondary" id="erase">Erase</span>
+                <span class="btn btn-outline-secondary" id="undo">Undo</span>
+                <span class="btn btn-outline-secondary" id="redo">Redo</span>
+            </div>
+
+            <div class="tool colors">Colors
+                <div onClick="change_color(this)" class="color-field" style="background: red;"></div>
+                <div onClick="change_color(this)" class="color-field" style="background: blue;"></div>
+                <div onClick="change_color(this)" class="color-field" style="background: green;"></div>
+
+                <input onInput="draw_color = this.value" type="color" class="color-picker">
+                <input type="range" min="1" max="80" class="width-range"
+                    onInput="brushWidth = this.value">
+            </div>
+
+            <div class="tool whole">
+                <span class="btn btn-outline-secondary" id="clear">Clear All</span>
+                <span class="btn btn-outline-secondary" id="save">Save Image</span>
+            </div>
+
+        </div>
+    </div>
+
+
+<!-- jQuery -->
+<script src="./jQuery.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+
+<!-- custom js -->
+<!-- common canvas -->
+<script src="./canvas-common.js"></script>
+
+<script src="./color_change.js"></script>
+
+<!-- rectangle -->
+<script src="./rectangle.js"></script>
+
+<!-- script function-->
+<script>
+
+</script>
+
+</body>
+</html>
