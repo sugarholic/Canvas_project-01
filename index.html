@@ -20,6 +20,7 @@
 
     <div class="field">
         <div class="canvas container">
+            <img id="canvas_img" style="display: none;">
             <canvas id="canvas-real" class="canvas" width="1000" height="500">
             </canvas>
             <canvas id="canvas-draft" class="canvas" width="1000" height="500"></canvas>  
@@ -27,41 +28,35 @@
 
 
         <div class="tools">
-            <div class="tool shapes">Shapes
-                <span class="btn btn-outline-secondary" id="rectangle">Rectangle</span>
-                <span class="btn btn-outline-secondary" id="circle">Circle</span>
-                <span class="btn btn-outline-secondary" id="triangle">Triangle</span>
-                <span class="btn btn-outline-secondary" id="line">Line</span>
-                <span class="btn btn-outline-secondary" id="curve">Curve</span>
+            <div class="tool">Shapes
+                <button type="button" class="btn btn-outline-secondary shapes" id="rectangle">Rectangle</button>
+                <button type="button" class="btn btn-outline-secondary shapes" id="circle">Circle</button>
+                <button type="button" class="btn btn-outline-secondary shapes" id="triangle">Triangle</button>
+                <button type="button" class="btn btn-outline-secondary shapes" id="line">Line</button>
+                <button type="button" class="btn btn-outline-secondary shapes" id="curve">Curve</button>
             </div>
 
             <div class="tool drawings">Drawings
-                <span class="btn btn-outline-secondary" id="pen">Pen</span>
-                <span class="btn btn-outline-secondary" id="spray">Spray</span>
-                <span class="btn btn-outline-secondary" id="stamp">Stamp</span>
-                <span class="btn btn-outline-secondary" id="fill">Fill</span>
+                <button type="button" class="btn btn-outline-secondary shapes" id="pen">Pen</button>
+                <button type="button" class="btn btn-outline-secondary shapes" id="spray">Spray</button>
+                <button type="button" class="btn btn-outline-secondary shapes" id="fill">Fill</button>
             </div>
 
             <div class="tool functions">Functions
-                <span class="btn btn-outline-secondary" id="text">Text</span>
-                <span class="btn btn-outline-secondary" id="erase">Erase</span>
-                <button onClick="undo_last()" type="button" class="btn btn-outline-secondary" id="undo">Undo</button>
-                <button onClick="redo_previous()" type="button" class="btn btn-outline-secondary" id="redo">Redo</button>
+                <!-- <span class="btn btn-outline-secondary" id="text">Text</span> -->
+                <!-- <button onClick="erase()" type="button" class="btn btn-outline-secondary shapes" id="erase">Erase</button>    -->
+                <button onClick="undo_last()" type="button" class="btn btn-outline-secondary" id="undo">Undo</button>                
+                <button onClick="clear_canvas()" type="button" class="btn btn-outline-secondary" id="clear">Clear All</button>
             </div>
 
-            <div class="tool colors">Colors
+            <div class="tool colors">Colors and Range
                 <div onClick="change_color(this)" class="color-field" style="background: red;"></div>
                 <div onClick="change_color(this)" class="color-field" style="background: blue;"></div>
                 <div onClick="change_color(this)" class="color-field" style="background: green;"></div>
 
                 <input onInput="draw_color = this.value" type="color" class="color-picker">
                 <input type="range" min="1" max="80" class="width-range"
-                    onInput="brushWidth = this.value">
-            </div>
-
-            <div class="tool whole">
-                <button onClick="clear_canvas()" type="button" class="btn btn-outline-secondary" id="clear">Clear All</button>
-                <button type="button" class="btn btn-outline-secondary" id="clear">Save Image</button>
+                    onInput="brushWidth = this.value" oninput="changeColor = this.value">
             </div>
 
         </div>
@@ -80,8 +75,14 @@
 <!-- common canvas -->
 <script src="./canvas-common.js"></script>
 
+<!-- erase -->
+<script src="./draw.js"></script>
+
 <!-- rectangle -->
-<script src="./rectangle.js"></script>
+<script src="./shapes.js"></script>
+
+<!-- line -->
+<script src="line.js"></script>
 
 <!-- script function-->
 <script>

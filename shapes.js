@@ -53,4 +53,11 @@
 //     onMouseLeave() {}
 //     onMouseEnter() {}
 //   }
+
+
+//rectangle
+const drawRect = (e) => {
+    ctxDraft.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
+}
+
   
