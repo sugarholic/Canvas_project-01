@@ -13,10 +13,10 @@
 
     <!-- custom style -->
     <link rel="stylesheet" href="./style.css">
-    <title>Canvas Proejct</title>
+    <title>Canvas Project</title>
 </head>
 <body>
-    <h1 style="text-decoration: underline;">Catherine and Tejahang Canvas Project 01</h1>    
+    <h1 style="text-decoration: underline;">Canvas Project 01</h1>    
 
     <div class="field">
         <div class="canvas container">
@@ -33,18 +33,22 @@
                 <button type="button" class="btn btn-outline-secondary shapes" id="circle">Circle</button>
                 <button type="button" class="btn btn-outline-secondary shapes" id="triangle">Triangle</button>
                 <button type="button" class="btn btn-outline-secondary shapes" id="line">Line</button>
-                <button type="button" class="btn btn-outline-secondary shapes" id="curve">Curve</button>
+                <!-- <button type="button" class="btn btn-outline-secondary shapes" id="curve">Curve</button> -->
             </div>
 
             <div class="tool drawings">Drawings
                 <button type="button" class="btn btn-outline-secondary shapes" id="pen">Pen</button>
                 <button type="button" class="btn btn-outline-secondary shapes" id="spray">Spray</button>
-                <button type="button" class="btn btn-outline-secondary shapes" id="fill">Fill</button>
+                <button>
+                    <input type="checkbox" id="fill">
+                    <label for="fill">Fill</label> 
+                </button>
+
             </div>
 
-            <div class="tool functions">Functions
+            <div class="tool functions">Erase
                 <!-- <span class="btn btn-outline-secondary" id="text">Text</span> -->
-                <!-- <button onClick="erase()" type="button" class="btn btn-outline-secondary shapes" id="erase">Erase</button>    -->
+                <button type="button" class="btn btn-outline-secondary shapes" id="erase">Erase</button>   
                 <button onClick="undo_last()" type="button" class="btn btn-outline-secondary" id="undo">Undo</button>                
                 <button onClick="clear_canvas()" type="button" class="btn btn-outline-secondary" id="clear">Clear All</button>
             </div>
@@ -54,9 +58,13 @@
                 <div onClick="change_color(this)" class="color-field" style="background: blue;"></div>
                 <div onClick="change_color(this)" class="color-field" style="background: green;"></div>
 
-                <input onInput="draw_color = this.value" type="color" class="color-picker">
+                <input onInput="draw_color = this.value" onInput="fillStyle = this.value" type="color" class="color-picker" id="color-picker">
                 <input type="range" min="1" max="80" class="width-range"
                     onInput="brushWidth = this.value" oninput="changeColor = this.value">
+            </div>
+
+            <div class="save"> 
+                <button class="save-img btn btn-outline-secondary m-3">Save Canvas</button>
             </div>
 
         </div>

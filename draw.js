@@ -15,22 +15,37 @@ isDrawing = false; //can specify later cuz, when we enter the canvas, it starts 
 draw_color = "black";
 brushWidth = 2;
 selectedTool = "pen";
+fill_color = "black";
 
 //undo 
 let restore_array = [];
 let index = -1;
 let erasing = false;
 
+const canvasBackground = () => {
+    ctxDraft.fillStyle = "white";
+    ctxDraft.fillRect (0, 0, canvasDraft.width, canvasDraft.height);
+    ctxDraft.fillStyle = draw_color;
+}
+
 //change_color
 function change_color(element) {
-    draw_color = element.style.background;
+    draw_color = element.style.background; 
+    fill_color = element.style.backgroundColor;
 }
+
+
+// colorPicker.addEventListener("change", () => {
+//     colorPicker.element.style.background = colorPicker.value;
+//     colorPicker.element.click();
+// });
 
 window.addEventListener("load", () => {
     canvasDraft.width = canvasDraft.offsetWidth;
     canvasDraft.height = canvasDraft.offsetHeight;
     // canvasReal.width = canvasReal.offsetWidth;
     // canvasReal.height = canvasReal.offsetHeight;
+    canvasBackground();
 })
 
 
@@ -42,6 +57,8 @@ const startDraw = (e) => {
     prevMouseY = e.offsetY;
     ctxDraft.beginPath(); //create a new path to draw instead of connect from the last point
     ctxDraft.lineWidth = brushWidth; //which is = 2
+    ctxDraft.strokeStyle = fill_color;
+    ctxDraft.fillStyle = fill_color;
     snapshot = ctxDraft.getImageData(0, 0, canvasDraft.width, canvasDraft.height);
 }
 
@@ -49,13 +66,25 @@ const drawing = (e) => {
     if(!isDrawing) return; //if not drawing, return starts here
     ctxDraft.putImageData(snapshot, 0, 0);
 
-    if(selectedTool === "pen") {
+    if(selectedTool === "pen" || selectedTool === "erase") {
+        ctxDraft.strokeStyle = selectedTool === "erase" ? "#ecedef" : draw_color;
         ctxDraft.lineTo(e.offsetX, e.offsetY);
         ctxDraft.stroke();
     } else if(selectedTool === "rectangle") {
         drawRect(e);
+    }else if (selectedTool === "circle") {
+        drawCircle(e);
+    } else if (selectedTool === "triangle"){
+        drawTriangle(e);
+    }else if (selectedTool === "line") {
+        drawLine(e);
+    }else {
+        drawCurve(e);
     }
-        ctxDraft.strokeStyle = draw_color; 
+        
+    
+    ctxDraft.strokeStyle = draw_color; 
+    ctxDraft.fillStyle = fill_color;
 
 
     e.preventDefault();
@@ -85,6 +114,7 @@ function clear_canvas() {
 
     restore_array = [];
     index = -1;
+    canvasBackground();
 }
 
 function undo_last() {
@@ -98,6 +128,9 @@ function undo_last() {
 }
 
 toolBtns = document.querySelectorAll(".shapes");
+fillColor = document.querySelector("#fill");
+colorPicker = document.querySelector("#color-picker");
+saveImg = document.querySelector(".save-img");
 
 toolBtns.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -107,6 +140,14 @@ toolBtns.forEach(btn => {
         console.log(selectedTool);
     });
 });
+
+
+saveImg.addEventListener("click", () => {
+    const link = document.createElement("a");
+    link.download = `${Date.now()}.jpg`;
+    link.href = canvasDraft.toDataURL();
+    link.click();
+})
 
 
 

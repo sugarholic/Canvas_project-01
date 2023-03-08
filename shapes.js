@@ -1,63 +1,57 @@
-// class DrawingRectangle extends PaintFunction {
-//     constructor(ctxReal, contxDraft) {
-//       super();
-//       this.ctxReal = ctxReal;
-//       this.ctxDraft = ctxDraft;
-//     }
-  
-//     onMouseDown(coord, event) {
-//       this.ctxReal.fillStyle = "#f44";
-//       this.origX = coord[0];
-//       this.origY = coord[1];
-//     }
-  
-//     onDragging(coord, event) {
-//       // Manipulating the context draft
-//       this.ctxDraft.fillStyle = "#f44";
-//       // Allows you to actually draw out your squares
-//       this.ctxDraft.clearRect(
-//         0,
-//         0,
-//         canvasDraft.width,
-//         canvasDraft.height
-//       );
-//       // Pass in the original x and y coordinates, followed by the new coordinates that we get for position x and y
-//       this.ctxDraft.fillRect(
-//         this.origX,
-//         this.origY,
-//         coord[0] - this.origX,
-//         coord[1] - this.origY
-//       );
-//     }
-  
-//     onMouseMove() {}
-  
-//     // Committing the element to the canvas
-//     onMouseUp(coord) {
-//       // Clearing the rectangle first
-//       this.ctxDraft.clearRect(
-//         0,
-//         0,
-//         canvasDraft.width,
-//         canvasDraft.height
-//       );
-//       // Commit that drawing to context real
-//       // Without this commit, it won't actually draw
-//       this.ctxReal.fillRect(
-//         this.origX,
-//         this.origY,
-//         coord[0] - this.origX,
-//         coord[1] - this.origY
-//       );
-//     }
-//     onMouseLeave() {}
-//     onMouseEnter() {}
-//   }
-
-
 //rectangle
 const drawRect = (e) => {
-    ctxDraft.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
+    if (!fillColor.checked) {
+        return ctxDraft.strokeRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
+    }
+     ctxDraft.fillRect(e.offsetX, e.offsetY, prevMouseX - e.offsetX, prevMouseY - e.offsetY);
 }
+
+
+//circle
+const drawCircle = (e) => {
+    ctxDraft.beginPath();
+    let radius = Math.sqrt(Math.pow((prevMouseX - e.offsetX), 2) + Math.pow((prevMouseY - e.offsetY), 2));
+    ctxDraft.arc(prevMouseX, prevMouseY, radius, 0, 2 * Math.PI);
+    fillColor.checked ? ctxDraft.fill() : ctxDraft.stroke();
+}
+
+
+//triangle
+const drawTriangle = (e) => {
+    ctxDraft.beginPath();
+    ctxDraft.moveTo(prevMouseX, prevMouseY); // moving the mouse to a mouse pointer
+    ctxDraft.lineTo(e.offsetX, e.offsetY); //creating first line accoring to mouse pointer
+    ctxDraft.lineTo(prevMouseX * 2 - e.offsetX, e.offsetY);
+    ctxDraft.closePath();
+    fillColor.checked ? ctxDraft.fill() : ctxDraft.stroke(); 
+}
+
+
+//line
+const drawLine = (e) => {
+    ctxDraft.beginPath();
+    ctxDraft.moveTo(prevMouseX, prevMouseY);
+    ctxDraft.lineTo(e.offsetX, e.offsetY);
+    ctxDraft.stroke();
+}
+
+//curve
+
+
+
+// const drawCurve = (e) => {
+//     let pointX = Math.floor((prevMouseX + e.offsetX)/2);
+//     let pointY = Math.floor(e.offsetY / 2)
+//     let cObject = {
+//         beginPoint: { x: prevMouseX, y: prevMouseY},
+//         controlPoint: {x:pointX, y: pointY},
+//         endPoint:{x: e.offsetX, y: e.offsetY}
+//     }
+
+//     ctxDraft.beginPath();
+//     ctxDraft.moveTo(cObject.beginPoint.prevMouseX, cObject.beginPoint.prevMouseY);
+//     ctxDraft.qaudraticCurveTo(cObject.controlPoint, cObject.controlPoint, cObject.endPoint, cObject.endPoint);
+//     ctxDraft.stroke();
+// }
 
   
